@@ -5,12 +5,9 @@ sample_dict = {
     "age": 25,
     "salary": 8000,
     "city": "New york"}
-
 # Keys to extract
 keys = ["name", "salary"]
-
 detail_dict = {}
-
 for x in keys:
     detail_dict[x] = sample_dict[x]
 print(detail_dict)
