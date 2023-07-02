@@ -15,7 +15,12 @@ def index():
         return f"An error occurred: {str(e)}"
 
 
-@app.route('/login')
+@app.route("/abc")
+def home():
+    return render_template("index.html", my_dict=my_dict)
+
+
+@app.route('/login', methods=['GET'])
 def login():
     return render_template('login.html')
 
