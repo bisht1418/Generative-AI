@@ -1,0 +1,15 @@
+# Ignore the virtual environment folder
+myenv/
+
+# Ignore specific files
+secret_key.txt
+database.sqlite
+
+# Ignore all files with a certain extension
+*.log
+
+# Ignore the virtual environment folders
+myenv/
+Include/
+Lib/
+Scripts/
