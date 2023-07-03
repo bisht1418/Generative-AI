@@ -1,0 +1,86 @@
+/* Apply some basic styling to the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f7f7f7;
+  }
+  
+  /* Center the h1 heading */
+  h1 {
+    text-align: center;
+  }
+  
+  /* Style the form */
+  form {
+    margin-bottom: 20px;
+  }
+  
+  /* Style the input field */
+  input[type="text"] {
+    padding: 8px;
+    width: 300px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Style the add button */
+  button[type="submit"] {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Style the unordered list */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Style the todo list items */
+  li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+ 
+    margin: auto;
+  }
+  
+  /* Style the todo text */
+  li span {
+    flex-grow: 1;
+    
+  }
+  
+  /* Style the delete button */
+  li form {
+    margin-left: 10px;
+    display: flex;
+   
+  }
+  
+  /* Style the delete button itself */
+  li button[type="submit"] {
+    padding: 4px 8px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Add hover effects to buttons */
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  li button[type="submit"]:hover {
+    background-color: #f44336;
+  }
+  

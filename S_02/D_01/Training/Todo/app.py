@@ -6,6 +6,8 @@ todos = []
 
 @app.route('/')
 def index():
+    parameter1 = 'Hello'
+    parameter2 = 'World'
     return render_template('index.html', todos=todos)
 
 
