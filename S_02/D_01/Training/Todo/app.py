@@ -22,6 +22,7 @@ def add():
 @app.route('/delete', methods=['POST'])
 def delete():
     todo = request.form.get('todo')
+    print(todo)
     if todo in todos:
         todos.remove(todo)
     return redirect('/')
