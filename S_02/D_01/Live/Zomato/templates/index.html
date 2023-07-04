@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zesty Zomato</title>
+    <style>
+      /* CSS styles for the page */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        padding: 8px;
+        width: 200px;
+      }
+
+      button {
+        padding: 8px 16px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Zesty Zomato</h1>
+
+    <div id="menu">
+      <h2>Menu</h2>
+      <table id="menu-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Menu</th>
+            <th>Price</th>
+            <th>Availability</th>
+          </tr>
+        </thead>
+        <tbody id="menu-list">
+          <!-- Menu items will be dynamically added here -->
+        </tbody>
+      </table>
+      <form id="add-dish-form">
+        <h3>Add New Dish</h3>
+        <input type="number" id="dish-id" placeholder="Dish Id" required />
+        <input type="text" id="dish-name" placeholder="Dish Name" required />
+        <input type="number" id="dish-price" placeholder="Price" required />
+        <button type="submit">Add Dish</button>
+      </form>
+    </div>
+
+    <div id="orders">
+      <h2>Orders</h2>
+      <table id="orders-table">
+        <thead>
+          <tr>
+            <th>Order Name</th>
+            <th>Order List</th>
+            <th>Price</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="orders-list">
+          <!-- Orders will be dynamically added here -->
+        </tbody>
+      </table>
+      <form id="place-order-form">
+        <h3>Place New Order</h3>
+        <input
+          type="text"
+          id="customer-name"
+          placeholder="Customer Name"
+          required
+        />
+        <input
+          type="text"
+          id="dish-ids"
+          placeholder="Dish IDs (comma-separated)"
+          required
+        />
+        <input
+          type="number"
+          id="dish_quantity"
+          placeholder="Dish Quantity"
+          required
+        />
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+  // Retrieve the dish menu and display it on the page
+  fetch("/menu")
+    .then((response) => response.json())
+    .then((data) => {
+      const menuTable = document.getElementById("menu-table");
+      const menuList = document.getElementById("menu-list");
+      data.forEach((dish) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+                <td>${dish.id}</td>
+                <td>${dish.name}</td>
+                <td>$${dish.price}</td>
+                <td>${dish.availability ? "Yes" : "No"}</td>
+            `;
+        menuList.appendChild(row);
+      });
+    });
+
+  // Add a new dish to the menu
+  const addDishForm = document.getElementById("add-dish-form");
+  addDishForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const dishName = document.getElementById("dish-name").value;
+    const dishPrice = document.getElementById("dish-price").value;
+    const dishId = document.getElementById("dish-id").value;
+
+    const dish = {
+      id: dishId,
+      name: dishName,
+      price: parseFloat(dishPrice),
+      availability: true, // Assuming newly added dishes are always available
+    };
+
+    fetch("/menu", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dish),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const menuTable = document.getElementById("menu-table");
+        const menuList = document.getElementById("menu-list");
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${data.id}</td>
+            <td>${data.name}</td>
+            <td>$${data.price}</td>
+            <td>${data.availability ? "Yes" : "No"}</td>
+        `;
+        menuList.appendChild(row);
+        addDishForm.reset();
+      });
+  });
+
+  // Place a new order
+  const placeOrderForm = document.getElementById("place-order-form");
+  placeOrderForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const customerName = document.getElementById("customer-name").value;
+    const dishIds = document.getElementById("dish-ids");
+    console.log(dishIds);
+    const dishQuantity = document
+      .getElementById("dish_quantity")
+      .value.split(",");
+
+    const order = {
+      customerName: customerName,
+      dishIds: dishIds,
+      dishQuantity: dishQuantity,
+    };
+
+    fetch("/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const ordersTable = document.getElementById("orders-table");
+        const ordersList = document.getElementById("orders-list");
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${data.orderName}</td>
+            <td>${data.dishList}</td>
+            <td>$${data.price}</td>
+            <td>${data.status}</td>
+        `;
+        ordersList.appendChild(row);
+        placeOrderForm.reset();
+      });
+  });
+</script>

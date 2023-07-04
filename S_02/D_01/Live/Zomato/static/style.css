@@ -1,0 +1,77 @@
+/* style.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+#menu {
+  margin-bottom: 30px;
+}
+
+#menu h2 {
+  color: #333;
+}
+
+#menu-list {
+  list-style: none;
+  padding: 0;
+}
+
+#menu-list li {
+  margin-bottom: 10px;
+}
+
+#order {
+  margin-bottom: 30px;
+}
+
+#order h2 {
+  color: #333;
+}
+
+#order-form, #add-dish-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#add-dish-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#order-form input[type="text"],#dish-name,#dish-price,#add-dish-form button,#dish-id,
+#order-form button {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#order-form button, #add-dish-form button {
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+#orders h2 {
+  color: #333;
+}
+
+#orders-list {
+  list-style: none;
+  padding: 0;
+}
+
+#orders-list li {
+  margin-bottom: 10px;
+}
