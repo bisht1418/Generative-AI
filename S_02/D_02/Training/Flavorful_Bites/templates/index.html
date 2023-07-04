@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flavorful_Bites - Restaurant Management</title>
+    <link rel="stylesheet" href="../static/style.css" />
+    <script src="../static/script.js" defer></script>
+  </head>
+  <body>
+    <h1>Flavorful_Bites - Restaurant Management</h1>
+
+    <!-- Display Menu -->
+    <h2>Menu</h2>
+    <table>
+      <tr>
+        <th>Dish ID</th>
+        <th>Dish Name</th>
+        <th>Price</th>
+        <th>Availability</th>
+      </tr>
+      {% for dish in menu %}
+      <tr>
+        <td>{{ dish.dish_id }}</td>
+        <td>{{ dish.dish_name }}</td>
+        <td>{{ dish.price }}</td>
+        <td>{{ dish.availability }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <!-- Menu Management -->
+    <h2>Menu Management</h2>
+    <form action="/add_dish" method="POST">
+      <label for="dish_name">Dish Name:</label>
+      <input type="text" id="dish_name" name="dish_name" required />
+
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" min="0" required />
+
+      <label for="availability">Availability:</label>
+      <select id="availability" name="availability" required>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <button type="submit">Add Dish</button>
+    </form>
+
+    <!-- Order Management -->
+    <h2>Order Management</h2>
+    <form action="/take_order" method="POST">
+      <label for="customer_name">Customer Name:</label>
+      <input type="text" id="customer_name" name="customer_name" required />
+
+      <label for="dish_ids">Dish IDs:</label>
+      <input type="text" id="dish_ids" name="dish_ids" required />
+
+      <button type="submit">Place Order</button>
+    </form>
+
+    <!-- Order Status Update -->
+    <h2>Order Status Update</h2>
+    <form action="/update_order_status" method="POST">
+      <label for="order_id">Order ID:</label>
+      <input type="text" id="order_id" name="order_id" required />
+
+      <label for="new_status">New Status:</label>
+      <select id="new_status" name="new_status" required>
+        <option value="preparing">Preparing</option>
+        <option value="ready">Ready for Pickup</option>
+        <option value="delivered">Delivered</option>
+      </select>
+
+      <button type="submit">Update Status</button>
+    </form>
+
+    <!-- Order Review -->
+    <h2>Order Review</h2>
+    <table>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer Name</th>
+        <th>Dish IDs</th>
+        <th>Status</th>
+      </tr>
+      <!-- Generate table rows dynamically using Flask -->
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.order_id }}</td>
+        <td>{{ order.customer_name }}</td>
+        <td>{{ order.dish_ids }}</td>
+        <td>{{ order.status }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <!-- Other sections and features -->
+  </body>
+</html>
