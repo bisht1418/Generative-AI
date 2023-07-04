@@ -5,12 +5,11 @@ app.debug = True
 
 # Define some sample data to simulate database records
 menu = [
-    {"dish_id": "1", "dish_name": "Pizza", "price": 10.99, "availability": True},
-    {"dish_id": "2", "dish_name": "Burger", "price": 5.99, "availability": True},
-    {"dish_id": "3", "dish_name": "Pasta", "price": 8.99, "availability": False},
+    {"dish_id": "1", "dish_name": "Pizza", "price": 10.99, "availability": "yes"},
+    {"dish_id": "2", "dish_name": "Burger", "price": 5.99, "availability": "yes"},
+    {"dish_id": "3", "dish_name": "Pasta", "price": 8.99, "availability": "yes"},
 ]
-orders = [{"dish_ids": "1", "customer_name": "neeraj", "order_id": 10.99, "status": True},
-          ]
+orders = []
 order_id_counter = 1
 
 
