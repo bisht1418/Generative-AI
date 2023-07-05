@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dishes Table</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dishes Table</h1>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+      <script>
+        fetch("/dishes")
+          .then((response) => response.json())
+          .then((data) => {
+            data.forEach((dish) => {
+              const row = document.createElement("tr");
+              const nameCell = document.createElement("td");
+              const descriptionCell = document.createElement("td");
+              const priceCell = document.createElement("td");
+              nameCell.textContent = dish.dish_name;
+              descriptionCell.textContent = dish.id;
+              priceCell.textContent = dish.price;
+              row.appendChild(nameCell);
+              row.appendChild(descriptionCell);
+              row.appendChild(priceCell);
+              document.querySelector("table").appendChild(row);
+            });
+          })
+          .catch((error) => console.error(error));
+      </script>
+    </table>
+  </body>
+</html>
