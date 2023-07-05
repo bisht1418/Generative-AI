@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant App</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <script src="../static/script.js" defer></script>
+  </head>
+  <body>
+    <h1>Welcome to our Restaurant</h1>
+    <div id="admin-section">
+      <h2>Admin Interface</h2>
+      <h3>Menu Items</h3>
+      <ul id="menu-list">
+        {% for item in menu_items %}
+        <li>
+          {{ item.name }} - Price: {{ item.price }} - Availability: {{
+          item.availability }}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <h3>Orders</h3>
+      <ul id="order-list">
+        {% for order in orders %}
+        <li>
+          Item ID: {{ order.item_id }} - Quantity: {{ order.quantity }} - User:
+          {{ order.user_name }}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <form id="add-menu-form">
+        <h3>Add Menu Item</h3>
+        <label for="id">ID:</label>
+        <input type="text" name="id" required /><br />
+        <label for="name">Name:</label>
+        <input type="text" name="name" required /><br />
+        <label for="price">Price:</label>
+        <input type="text" name="price" required /><br />
+        <button type="submit">Add Item</button>
+      </form>
+
+      <form id="update-menu-form">
+        <h3>Update Menu Item Availability</h3>
+        <label for="id">ID:</label>
+        <input type="text" name="id" required /><br />
+        <label for="availability">Availability:</label>
+        <select name="availability" required>
+          <option value="true">Available</option>
+          <option value="false">Not Available</option></select
+        ><br />
+        <button type="submit">Update Availability</button>
+      </form>
+
+      <form id="delete-menu-form">
+        <h3>Delete Menu Item</h3>
+        <label for="id">ID:</label>
+        <input type="text" name="id" required /><br />
+        <button type="submit">Delete Item</button>
+      </form>
+    </div>
+
+    <div id="user-section">
+      <h2>User Interface</h2>
+      <form id="order-form">
+        <h3>Place an Order</h3>
+        <label for="item_id">Menu Item ID:</label>
+        <input type="text" name="item_id" required /><br />
+        <label for="quantity">Quantity:</label>
+        <input type="text" name="quantity" required /><br />
+        <label for="user_name">Your Name:</label>
+        <input type="text" name="user_name" required /><br />
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+
+    <div id="toggle-section">
+      <button id="toggle-button" onclick="toggleInterface()">
+        Toggle Interface
+      </button>
+    </div>
+
+    <div id="chat-icon" onclick="toggleChatBox()">
+      <span class="material-symbols-outlined"> mark_email_unread </span>
+    </div>
+
+    <div id="chat-box" class="collapsed">
+      <div id="chat-header">
+        <span class="material-symbols-outlined" onclick="toggleChatBox()">
+          mark_email_unread
+        </span>
+      </div>
+      <div id="chat-container"></div>
+      <div id="user-input-container">
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button onclick="processUserInput()">Send</button>
+      </div>
+    </div>
+  </body>
+</html>
