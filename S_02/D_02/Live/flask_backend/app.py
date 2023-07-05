@@ -4,7 +4,11 @@ from flask import Flask, jsonify, request, abort
 app = Flask(__name__)
 
 # Menu data
-menu = []
+menu = [
+    {"dish_id": "1", "dish_name": "Pizza", "price": 10.99, "availability": "yes"},
+    {"dish_id": "2", "dish_name": "Burger", "price": 5.99, "availability": "yes"},
+    {"dish_id": "3", "dish_name": "Pasta", "price": 8.99, "availability": "yes"},
+]
 
 # Order data
 orders = []
