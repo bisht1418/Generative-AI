@@ -135,11 +135,13 @@ def place_order():
     phone = request.form['phone']
 
     food_item = db.food_items.find_one({'_id': ObjectId(dish_id)})
+    print(food_item)
     if food_item:
         total_price = food_item['price'] * quantity
 
         order = {
             'dish_id': dish_id,
+            'dish_name': food_item["dish_name"],
             'quantity': quantity,
             'user_name': user_name,
             'address': address,
