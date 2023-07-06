@@ -1,0 +1,45 @@
+/* style.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.food-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.food-item h2 {
+    margin: 0;
+}
+
+.food-item p {
+    margin: 0;
+}
+
+form input[type="hidden"],
+form input[type="number"],
+form input[type="text"],
+form button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+form button:hover {
+    background-color: #45a049;
+}

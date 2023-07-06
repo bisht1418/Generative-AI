@@ -1,0 +1,31 @@
+<!-- user_orders.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your Orders</title>
+    <link rel="stylesheet" type="text/css" href="../static/user_orders.css" />
+  </head>
+  <body>
+    {% include 'navigation.html' %}
+    <div class="container">
+      <h1>Your Orders</h1>
+      <table>
+        <tr>
+          <th>Dish Name</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Status</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order.dish_name }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.total_price }}</td>
+          <td>{{ order.status }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

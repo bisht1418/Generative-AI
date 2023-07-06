@@ -1,0 +1,45 @@
+<!-- user_menu.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Menu</title>
+    <link rel="stylesheet" type="text/css" href="../static/user_menu.css" />
+  </head>
+  <body>
+    {% include 'navigation.html' %}
+    <div class="container">
+      <h1>Menu</h1>
+      {% for food_item in food_items %}
+      <div class="food-item">
+        <h2>{{ food_item.dish_name }}</h2>
+        <p>Price: {{ food_item.price }}</p>
+        {% if food_item.availability %}
+        <p>Available</p>
+        {% else %}
+        <p>Not Available</p>
+        {% endif %}
+        <form action="/place_order" method="POST">
+          <input type="hidden" name="dish_id" value="{{ food_item._id }}" />
+          <input
+            type="number"
+            name="quantity"
+            placeholder="Quantity"
+            min="1"
+            required
+          />
+          <input
+            type="text"
+            name="user_name"
+            placeholder="Your Name"
+            required
+          />
+          <input type="text" name="address" placeholder="Address" required />
+          <input type="text" name="phone" placeholder="Phone Number" required />
+          <button type="submit">Place Order</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
