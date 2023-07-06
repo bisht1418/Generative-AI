@@ -1,13 +1,18 @@
 # app.py
 
+import os
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from pymongo import MongoClient
 from bson import ObjectId
 import openai
 
+from dotenv import load_dotenv
+load_dotenv()
+
+
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = os.getenv('OPENAI_API_KEY')
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 # MongoDB connection
