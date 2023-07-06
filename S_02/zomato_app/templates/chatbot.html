@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant App</title>
+    <link rel="stylesheet" type="text/css" href="../static/chatbot.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <script src="../static/chatbot.js" defer></script>
+  </head>
+  <body>
+    <div id="chat-icon" onclick="toggleChatBox()">
+      <span class="material-symbols-outlined"> mark_email_unread </span>
+    </div>
+
+    <div id="chat-box" class="collapsed">
+      <div id="chat-header">
+        <span class="material-symbols-outlined" onclick="toggleChatBox()">
+          mark_email_unread
+        </span>
+      </div>
+      <div id="chat-container">
+        {% if query %}
+        <h3>User Query:</h3>
+        <p>{{ query }}</p>
+        {% endif %} {% if response %}
+        <h3>Response:</h3>
+        <p>{{ response }}</p>
+        {% endif %}
+      </div>
+      <div id="user-input-container">
+        <form action="/get_response" method="POST">
+          <input id="user-input" type="text" name="user_query" />
+          <input id="user-input" type="submit" value="Ask" />
+        </form>
+        <button onclick="processUserInput()">Send</button>
+      </div>
+    </div>
+  </body>
+</html>

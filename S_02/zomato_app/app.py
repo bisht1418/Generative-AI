@@ -1,11 +1,13 @@
 # app.py
 
 from flask import Flask, render_template, redirect, url_for, request, flash
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin,current_user
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from pymongo import MongoClient
 from bson import ObjectId
+import openai
 
 app = Flask(__name__)
+openai.api_key = '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'
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 # MongoDB connection
@@ -51,10 +53,11 @@ def admin_login():
         else:
             flash('Invalid username or password', 'error')
 
-
     return render_template('admin_login.html')
 
 # Admin Register
+
+
 @app.route('/admin/register', methods=['GET', 'POST'])
 def admin_register():
     if request.method == 'POST':
@@ -155,6 +158,25 @@ def place_order():
 def user_orders():
     orders = db.orders.find()
     return render_template('user_orders.html', orders=orders)
+
+
+@app.route('/get_response', methods=['POST'])
+def get_response():
+    user_query = request.form['user_query']
+    response = generate_response(user_query)
+    return render_template('user_home.html', query=user_query, response=response)
+
+
+def generate_response(query):
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=query,
+        max_tokens=50,
+        n=1,
+        stop=None,
+        temperature=0.7
+    )
+    return response.choices[0].text.strip()
 
 
 if __name__ == '__main__':
