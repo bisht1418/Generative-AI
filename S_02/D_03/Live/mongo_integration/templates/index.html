@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zesty Zomato</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .menu-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .menu-item .name {
+        font-weight: bold;
+      }
+
+      .menu-item .price {
+        color: green;
+      }
+
+      .order-form {
+        margin-top: 20px;
+      }
+
+      .order-form input[type="text"],
+      .order-form input[type="number"],
+      .order-form button {
+        margin-top: 10px;
+      }
+
+      .order-list {
+        margin-top: 20px;
+      }
+
+      .order-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .order-item .customer {
+        font-weight: bold;
+      }
+
+      .order-item .status {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Zesty Zomato</h1>
+      <div class="menu">
+        <h2>Menu</h2>
+        <div class="menu-items"></div>
+      </div>
+      <div class="order-form">
+        <h2>Place Order</h2>
+        <input type="text" id="customerName" placeholder="Customer Name" />
+        <select id="menuId">
+          <option value="" selected disabled>Select a dish</option>
+        </select>
+        <input type="number" id="quantity" placeholder="Quantity" />
+        <button onclick="placeOrder()">Place Order</button>
+      </div>
+      <div class="order-list">
+        <h2>Orders</h2>
+        <div class="orders"></div>
+      </div>
+    </div>
+
+    <script>
+      // Fetch dishes from the server and populate the menu
+      fetch("/dishes")
+        .then((response) => response.json())
+        .then((dishes) => {
+          const menuItems = document.querySelector(".menu-items");
+          dishes.forEach((dish) => {
+            const menuItem = document.createElement("div");
+            menuItem.classList.add("menu-item");
+            menuItem.innerHTML = `
+                        <div class="name">${dish.dish_name}</div>
+                        <div class="price">Price: ${dish.price}</div>
+                        <div class="availability">Availability: ${dish.availability}</div>
+                    `;
+            menuItems.appendChild(menuItem);
+
+            // Populate the menu select options for placing an order
+            const menuSelect = document.getElementById("menuId");
+            const option = document.createElement("option");
+            option.value = dish._id;
+            option.textContent = dish.dish_name;
+            menuSelect.appendChild(option);
+          });
+        });
+
+      // Fetch orders from the server and populate the order list
+      fetch("/orders")
+        .then((response) => response.json())
+        .then((orders) => {
+          const orderList = document.querySelector(".orders");
+          orders.forEach((order) => {
+            const orderItem = document.createElement("div");
+            orderItem.classList.add("order-item");
+            orderItem.innerHTML = `
+                        <div class="customer">Customer: ${order.customer_name}</div>
+                        <divclass="status">Status: ${order.status}</div>
+                        <div class="menu">Menu: ${order.menu_id}</div>
+                        <div class="quantity">Quantity: ${order.quantity}</div>
+                        <div class="total">Total Price: ${order.total_price}</div>
+                    `;
+            orderList.appendChild(orderItem);
+          });
+        });
+
+      // Establish a WebSocket connection
+      const socket = io();
+
+      // Listen for 'new_dish_added' event
+      socket.on("new_dish_added", function (newDish) {
+        const menuItem = document.createElement("div");
+        menuItem.classList.add("menu-item");
+        menuItem.innerHTML = `
+                <div class="name">${newDish.dish_name}</div>
+                <div class="price">Price: ${newDish.price}</div>
+                <div class="availability">Availability: ${newDish.availability}</div>
+            `;
+        const menuItems = document.querySelector(".menu-items");
+        menuItems.appendChild(menuItem);
+
+        // Update the menu select options for placing an order
+        const menuSelect = document.getElementById("menuId");
+        const option = document.createElement("option");
+        option.value = newDish._id;
+        option.textContent = newDish.dish_name;
+        menuSelect.appendChild(option);
+      });
+
+      // Listen for 'order_status_updated' event
+      socket.on("order_status_updated", function (updatedOrder) {
+        const orderItem = document.getElementById(updatedOrder._id);
+        if (orderItem) {
+          const statusElement = orderItem.querySelector(".status");
+          statusElement.textContent = "Status: " + updatedOrder.status;
+        }
+      });
+
+      // Function to place an order
+      function placeOrder() {
+        const customerName = document.getElementById("customerName").value;
+        const menuId = document.getElementById("menuId").value;
+        const quantity = document.getElementById("quantity").value;
+
+        if (!customerName || !menuId || !quantity) {
+          alert("Please enter all order details");
+          return;
+        }
+
+        const order = {
+          customer_name: customerName,
+          _id: menuId,
+          quantity: quantity,
+        };
+
+        fetch("/orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(order),
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error(error));
+      }
+    </script>
+  </body>
+</html>
