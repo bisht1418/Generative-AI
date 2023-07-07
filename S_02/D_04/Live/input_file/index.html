@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Reading Example</title>
+    <script>
+      function handleFile(event) {
+        const file = event.target.files[0];
+        console.log(file);
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+          const contents = event.target.result;
+          // Process the contents of the file here
+          console.log(contents);
+        };
+
+        reader.readAsText(file);
+      }
+    </script>
+  </head>
+  <body>
+    <input type="file" onchange="handleFile(event)" />
+  </body>
+</html>
