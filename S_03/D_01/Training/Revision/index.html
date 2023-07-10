@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello...</h1>
+
+    <script>
+      // Function to extract data from the API response
+      function extractData(response) {
+        const title = response.h1;
+        const links = response.a;
+
+        console.log(title);
+        console.log(links);
+      }
+
+      // Function to handle errors
+      function handleError(error) {
+        console.error(error);
+      }
+
+      // Fetch data from the API
+      fetch(
+        "https://api.example.com/scrape?url=https://www.google.com/search?q=hello"
+      )
+        .then((response) => response.json())
+        .then((data) => extractData(data))
+        .catch((error) => handleError(error));
+    </script>
+  </body>
+</html>
