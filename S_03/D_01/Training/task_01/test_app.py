@@ -1,5 +1,5 @@
 import pytest
-from app import app
+from app import app, weather_data
 
 
 @pytest.fixture
@@ -25,6 +25,9 @@ def test_add_weather(client):
     assert response.status_code == 201
     assert data['message'] == 'Weather data added successfully'
 
+    # Additional assertion to verify the added weather data
+    assert weather_data['Chicago'] == {'temperature': 18, 'weather': 'Sunny'}
+
 
 def test_update_weather(client):
     response = client.put('/weather/San Francisco', json={'temperature': 16})
@@ -32,7 +35,7 @@ def test_update_weather(client):
 
     assert response.status_code == 200
     assert data['message'] == 'Weather data updated successfully'
-    assert app.weather_data['San Francisco']['temperature'] == 16
+    assert weather_data['San Francisco']['temperature'] == 16
 
 
 def test_delete_weather(client):
@@ -41,4 +44,4 @@ def test_delete_weather(client):
 
     assert response.status_code == 200
     assert data['message'] == 'Weather data deleted successfully'
-    assert 'Seattle' not in app.weather_data
+    assert 'Seattle' not in weather_data
