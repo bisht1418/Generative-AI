@@ -1,0 +1,26 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.counter_container{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+button{
+    border: none;
+    margin-left: 2rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: cadetblue;
+   
+}
+
+button:hover{
+  background: rgb(210, 210, 210);
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
