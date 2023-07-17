@@ -4,3 +4,15 @@ h1{
     font-family: Arial, Helvetica, sans-serif;
     text-decoration: underline;
 }
+
+.post_container{
+    border: 1px solid black;
+    width: 95%;
+    min-height: 200px;
+    margin: auto;
+    overflow-y: auto;
+}
+
+.post_card{
+
+}
