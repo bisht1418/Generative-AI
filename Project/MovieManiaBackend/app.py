@@ -40,11 +40,12 @@ class User(Document):
 
 
 class Movie(Document):
-    title = StringField(required=True)
-    description = StringField(required=True)
-    release_date = StringField(required=True)
-    duration = StringField(required=True)
-    image_url = StringField()
+    Title = StringField(required=True)
+    Year = StringField(required=True)
+    imdbID = StringField(required=True)
+    Type = StringField()
+    Poster = StringField()
+    _id = StringField()
 
 
 class Show(Document):
@@ -69,6 +70,9 @@ class Participant(Document):
 class UserSchema(ma.Schema):
     class Meta:
         fields = ('id', 'username', 'email', 'role')
+
+
+# =============================================================
 
 
 @app.route('/register', methods=['POST'])
@@ -110,5 +114,82 @@ def login():
     return jsonify(user=user_dict, access_token=access_token)
 
 
+# ================================================================
+
+# movies only get request is importants
+
+
+# Endpoint to add a new movie
+# @app.route('/movies', methods=['POST'])
+# def add_movie():
+    data = request.json
+    movie = Movie(
+        Title=data['Title'],
+        imdbID=data['imdbID'],
+        Year=data['Year'],
+        Poster=data['Poster'],
+        Type=data['Type']
+    )
+    movie.save()
+
+    movie_data = {
+        'id': str(movie._id),
+        'Title': movie.Title,
+        "imdbID": movie.imdbId,
+        'Year': movie.Year,
+        'Poster': movie.Poster,
+        "Type": movie.Type
+    }
+
+    return jsonify(movie_data), 201
+
+# Endpoint to get all movies
+
+
+@app.route('/movies', methods=['GET'])
+def get_movies():
+    movies = Movie.objects.all()
+
+    movie_list = []
+    for movie in movies:
+        movie_data = {
+            'id': str(movie._id),
+            'Title': movie.Title,
+            "imdbID": movie.imdbID,
+            'Year': movie.Year,
+            'Poster': movie.Poster,
+            "Type": movie.Type
+        }
+        movie_list.append(movie_data)
+
+    return jsonify(movie_list), 200
+
+
+# @app.route('/movies/<string:imdbID>', methods=['PUT'])
+# def update_movie(imdbID):
+#     data = request.json
+#     movie = Movie.objects(imdbID=imdbID).first()
+#     if not movie:
+#         return jsonify({'message': 'Movie not found'}), 404
+
+#     movie.title = data.get('title', movie.title)
+#     movie.year = data.get('year', movie.year)
+#     movie.type = data.get('type', movie.type)
+#     movie.poster = data.get('poster', movie.poster)
+#     movie.save()
+#     return jsonify(ma.dump(movie))
+
+
+# @app.route('/movies/<imdbID>', methods=['DELETE'])
+# def delete_movie(imdbID):
+#     movie = Movie.objects(imdbID=imdbID).first()
+#     if not movie:
+#         return jsonify({'message': 'Movie not found'}), 404
+
+#     movie.delete()
+#     return jsonify({'message': 'Movie deleted successfully'})
+
+
+# ============================================================
 if __name__ == '__main__':
     app.run(debug=True)
