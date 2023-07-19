@@ -1,0 +1,10 @@
+body {
+    position: relative;
+    overflow: hidden;
+    background-image: url('https://images.pexels.com/photos/3131971/pexels-photo-3131971.jpeg?auto=compress&cs=tinysrgb&w=600');
+    background-size: cover;
+    background-position: center;
+    height:  100vh;
+
+  }
+  
