@@ -11,7 +11,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'movies', component: MoviesComponent },
-  { path: 'shows', component: ShowsComponent },
+  { path: 'shows/:id', component: ShowsComponent },
   { path: 'events', component: EventsComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },

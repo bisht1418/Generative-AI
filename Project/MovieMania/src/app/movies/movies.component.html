@@ -15,7 +15,7 @@
     <h2>Movie List</h2>
     <div class="movie-card-container">
       <div class="movie-card" *ngFor="let movie of movies">
-        <a [routerLink]="['/movies', movie.id]">{{ movie.Title }}</a>
+        <a [routerLink]="['/shows', movie.id]">{{ movie.Title }}</a>
         <p>Year: {{ movie.Year }}</p>
         <img [src]="movie.Poster" alt="{{ movie.Title }}" />
       </div>

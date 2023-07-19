@@ -1,1 +1,38 @@
-<p>shows works!</p>
+<div class="loading-container" *ngIf="loading; else content">
+  <!-- Loading indicator -->
+  <p>Loading...</p>
+</div>
+
+<img
+  class="back_img"
+  src="https://images.pexels.com/photos/3709369/pexels-photo-3709369.jpeg?auto=compress&cs=tinysrgb&w=600"
+  alt=""
+/>
+
+<ng-template #content>
+  <div *ngIf="movie" class="movie-details-container">
+    <!-- Movie Details Section -->
+    <div class="left-section">
+      <h2>{{ movie.Title }}</h2>
+      <p>Year: {{ movie.Year }}</p>
+      <p>Type: {{ movie.Type }}</p>
+      <img [src]="movie.Poster" alt="{{ movie.Title }}" />
+      <!-- Add more details here as needed -->
+    </div>
+
+    <!-- Booking Section -->
+    <div class="right-section">
+      <h3>Booking Details</h3>
+      <!-- Add static booking details here -->
+      <h3>Booking Details</h3>
+      <p>Date: July 31, 2023</p>
+      <p>Show Time: 7:30 PM</p>
+      <p>Available Seats: 50</p>
+    </div>
+  </div>
+
+  <div *ngIf="!movie" class="no-movie">
+    <!-- No movie details to display -->
+    <p>No movie details available.</p>
+  </div>
+</ng-template>
