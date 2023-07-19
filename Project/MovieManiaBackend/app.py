@@ -7,6 +7,7 @@ from flask_jwt_extended import JWTManager, jwt_required, create_access_token, ge
 from flask_marshmallow import Marshmallow
 from bson.objectid import ObjectId
 from mongoengine import Document, StringField, ReferenceField, DateTimeField, ObjectIdField, connect
+from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -14,8 +15,12 @@ app.config['MONGO_URI'] = 'mongodb+srv://bishtnrj1418:neeraj@cluster0.ofkqsxc.mo
 # Change this to a random secure key in production
 app.config['JWT_SECRET_KEY'] = 'neeraj'
 app.config['MONGODB_SETTINGS'] = {
+
     'host': 'mongodb+srv://bishtnrj1418:neeraj@cluster0.ofkqsxc.mongodb.net/MovieMania?retryWrites=true&w=majority'
 }
+
+CORS(app)
+
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 ma = Marshmallow(app)
@@ -146,23 +151,59 @@ def login():
 # Endpoint to get all movies
 
 
+# @app.route('/movies', methods=['GET'])
+# def get_movies():
+#     movies = Movie.objects.all()
+
+#     movie_list = []
+#     for movie in movies:
+#         movie_data = {
+#             'id': str(movie._id),
+#             'Title': movie.Title,
+#             "imdbID": movie.imdbID,
+#             'Year': movie.Year,
+#             'Poster': movie.Poster,
+#             "Type": movie.Type
+#         }
+#         movie_list.append(movie_data)
+
+#     return jsonify(movie_list), 200
+
 @app.route('/movies', methods=['GET'])
-def get_movies():
-    movies = Movie.objects.all()
+def movies():
+    if request.method == 'GET':
+        movies = Movie.objects().all()
+        movies_list = []
+        for movie in movies:
+            movie_dict = {
+                'id': str(movie._id),
+                'Title': movie.Title,
+                "imdbID": movie.imdbID,
+                'Year': movie.Year,
+                'Poster': movie.Poster,
+                "Type": movie.Type
+            }
+            movies_list.append(movie_dict)
+        return jsonify(movies_list), 200
 
-    movie_list = []
-    for movie in movies:
-        movie_data = {
-            'id': str(movie._id),
-            'Title': movie.Title,
-            "imdbID": movie.imdbID,
-            'Year': movie.Year,
-            'Poster': movie.Poster,
-            "Type": movie.Type
-        }
-        movie_list.append(movie_data)
 
-    return jsonify(movie_list), 200
+@app.route('/movies/<string:movie_id>', methods=['GET'])
+def get_movie_by_id(movie_id):
+    if request.method == 'GET':
+        try:
+            movie_id_obj = ObjectId(movie_id)
+            movie = Movie.objects.get(_id=movie_id_obj)
+            movie_data = {
+                'id': str(movie._id),
+                'Title': movie.Title,
+                "imdbID": movie.imdbID,
+                'Year': movie.Year,
+                'Poster': movie.Poster,
+                "Type": movie.Type
+            }
+            return jsonify(movie_data), 200
+        except Movie.DoesNotExist:
+            return jsonify({'message': 'Movie not found'}), 404
 
 
 # @app.route('/movies/<string:imdbID>', methods=['PUT'])
@@ -189,7 +230,72 @@ def get_movies():
 #     movie.delete()
 #     return jsonify({'message': 'Movie deleted successfully'})
 
-
 # ============================================================
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+# from flask import Flask, request, jsonify
+# from pymongo import MongoClient
+# from flask_cors import CORS
+
+# app = Flask(__name__)
+# CORS(app)
+
+# # Connect to MongoDB
+# connection_string = "mongodb+srv://bishtnrj1418:neeraj@cluster0.ofkqsxc.mongodb.net/MovieMania?retryWrites=true&w=majority"
+# client = MongoClient(connection_string)
+# # Replace "cine_matrix" with your preferred database name
+# db = client["MovieMania"]
+# users_collection = db["users"]
+
+# # Define routes and endpoints for User CRUD operations
+
+
+# @app.route("/api/users", methods=["POST"])
+# def create_user():
+#     data = request.json
+#     user_id = users_collection.insert_one(data).inserted_id
+#     return jsonify({"message": "User created successfully", "user_id": str(user_id)}), 201
+
+
+# @app.route("/api/users", methods=["GET"])
+# def get_all_users():
+#     users = list(users_collection.find({}, {"_id": 0}))
+#     return jsonify(users), 200
+
+
+# @app.route("/api/users/<user_id>", methods=["GET"])
+# def get_user(user_id):
+#     user = users_collection.find_one({"_id": user_id}, {"_id": 0})
+#     if user:
+#         return jsonify(user), 200
+#     else:
+#         return jsonify({"message": "User not found"}), 404
+
+
+# @app.route("/api/users/<user_id>", methods=["PUT"])
+# def update_user(user_id):
+#     data = request.json
+#     updated_user = users_collection.find_one_and_update(
+#         {"_id": user_id},
+#         {"$set": data},
+#         return_document=True
+#     )
+#     if updated_user:
+#         return jsonify({"message": "User updated successfully", "user": updated_user}), 200
+#     else:
+#         return jsonify({"message": "User not found"}), 404
+
+
+# @app.route("/api/users/<user_id>", methods=["DELETE"])
+# def delete_user(user_id):
+#     result = users_collection.delete_one({"_id": user_id})
+#     if result.deleted_count > 0:
+#         return jsonify({"message": "User deleted successfully"}), 200
+#     else:
+#         return jsonify({"message": "User not found"}), 404
+
+
+# if __name__ == "__main__":
+#     app.run(debug=True)
