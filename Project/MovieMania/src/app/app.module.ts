@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'; 
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +11,7 @@ import { ShowsComponent } from './shows/shows.component';
 import { EventsComponent } from './events/events.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 
@@ -22,11 +25,13 @@ import { LoginComponent } from './login/login.component';
     EventsComponent,
     ProfileComponent,
     LoginComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SlickCarouselModule,
+    FormsModule,
+    HttpClientModule
   
   ],
   providers: [],

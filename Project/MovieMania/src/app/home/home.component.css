@@ -1,10 +1,96 @@
-body {
-    position: relative;
-    overflow: hidden;
-    background-image: url('https://images.pexels.com/photos/3131971/pexels-photo-3131971.jpeg?auto=compress&cs=tinysrgb&w=600');
-    background-size: cover;
-    background-position: center;
-    height:  100vh;
+*{
+  font-family: Arial, Helvetica, sans-serif;;
+}
 
+img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -10000;
+  opacity: calc(0.5);
+}
+
+/* home.component.css */
+
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 36px;
+  color: #333;
+  animation: fadeInDown 1s forwards;
+}
+
+.header p {
+  font-size: 20px;
+  color: #666;
+  font-family: Arial, Helvetica, sans-serif;
+  animation: fadeInDown 1s forwards;
+}
+
+.features {
+  display: flex;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.feature-item {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature-item i {
+  font-size: 40px;
+  color: #333;
+}
+
+.feature-item h3 {
+  font-size: 24px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.feature-item p {
+  font-size: 16px;
+  color: #666;
+}
+
+.feature-item:hover {
+  transform: scale(1.05);
+  cursor: pointer;;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+/* Animation keyframes */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
