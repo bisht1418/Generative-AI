@@ -22,12 +22,16 @@
 
     <!-- Booking Section -->
     <div class="right-section">
-      <h3>Booking Details</h3>
-      <!-- Add static booking details here -->
-      <h3>Booking Details</h3>
-      <p>Date: July 31, 2023</p>
-      <p>Show Time: 7:30 PM</p>
-      <p>Available Seats: 50</p>
+      <h3>Show Details</h3>
+      <div *ngFor="let show of shows">
+        <div class="book_show">
+          <p>Date: {{ show.date }}</p>
+          <p>Show Time: {{ show.time }}</p>
+          <p>Available Seats: {{ show.seatsAvailable }}</p>
+          <button>Book Show</button>
+          <!-- Add more show details here as needed -->
+        </div>
+      </div>
     </div>
   </div>
 

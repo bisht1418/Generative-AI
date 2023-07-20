@@ -12,6 +12,7 @@ import { EventsComponent } from './events/events.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 
@@ -25,6 +26,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     EventsComponent,
     ProfileComponent,
     LoginComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,

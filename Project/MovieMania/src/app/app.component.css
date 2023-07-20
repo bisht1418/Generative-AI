@@ -44,6 +44,7 @@ nav {
   nav a:hover {
     color: #007bff;
     width: 100%;
+    text-decoration: underline;
     
   }
   

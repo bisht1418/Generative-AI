@@ -1,5 +1,3 @@
-// src/app/shows/shows.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -10,11 +8,17 @@ import { Movie } from '../models/movie.model';
   templateUrl: './shows.component.html',
   styleUrls: ['./shows.component.css']
 })
+
+
+
 export class ShowsComponent implements OnInit {
-  movieId!: string; // Add '!' to tell TypeScript that it will be initialized later
-  movie!: Movie; // Add '!' to tell TypeScript that it will be initialized later
+  movieId!: string;
+  movie!: Movie;
   loading = false;
-  seatRows!: number[][]; // Add '!' to tell TypeScript that it will be initialized later
+  seatRows!: number[][];
+  selectedSeats: string[] = [];
+  mymovie:  Movie | null = null;
+
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
@@ -24,6 +28,7 @@ export class ShowsComponent implements OnInit {
       this.getMovieDetails();
     });
   }
+  
 
   getMovieDetails(): void {
     this.loading = true;
@@ -52,5 +57,33 @@ export class ShowsComponent implements OnInit {
     }
   }
 
+  selectSeat(row: number, seat: number): void {
+    if (this.seatRows[row][seat] === 0) {
+      // Seat is available, select it
+      this.seatRows[row][seat] = 2; // 2 represents "selected"
+      this.selectedSeats.push(`${row + 1}${String.fromCharCode(65 + seat)}`);
+    } else if (this.seatRows[row][seat] === 2) {
+      // Seat is already selected, unselect it
+      this.seatRows[row][seat] = 0; // 0 represents "available"
+      const seatIndex = this.selectedSeats.indexOf(`${row + 1}${String.fromCharCode(65 + seat)}`);
+      if (seatIndex !== -1) {
+        this.selectedSeats.splice(seatIndex, 1);
+      }
+    }
+  }
 
+  shows = [
+    { id: 1, date: this.getFormattedDate(0), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
+    { id: 2, date: this.getFormattedDate(0), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
+    { id: 3, date: this.getFormattedDate(1), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
+    { id: 4, date: this.getFormattedDate(1), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
+    { id: 5, date: this.getFormattedDate(2), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
+    { id: 6, date: this.getFormattedDate(2), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
+  ];
+  
+  getFormattedDate(offset: number): string {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + offset);
+    return currentDate.toISOString().slice(0, 10);
+  }
 }
