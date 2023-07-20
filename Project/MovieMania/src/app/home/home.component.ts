@@ -1,10 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
+  constructor(private router: Router) { }
+
+  ngOnInit(): void {
+    // Subscribe to the NavigationEnd event
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Call the refreshPage() function whenever NavigationEnd event occurs
+      this.refreshPage();
+    });
+  }
+
+  refreshPage() {
+    location.reload();
+  }
 }

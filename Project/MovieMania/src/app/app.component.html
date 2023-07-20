@@ -2,6 +2,9 @@
   <div class="logo">
     <img src="../assets/images/logo.png" alt="" />
   </div>
+  <h3 class="welcome-heading">
+    Welcome: {{ storedData ? storedData : "guest" }}👋
+  </h3>
   <div class="nav_body">
     <a routerLink="/">Home</a>
     <a routerLink="/movies">Movies</a>

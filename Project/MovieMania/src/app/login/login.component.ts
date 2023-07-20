@@ -34,6 +34,7 @@ export class LoginComponent {
         console.log('Login successful:', data);
         console.log(data.token)
         localStorage.setItem('token', data.access_token);
+        localStorage.setItem('name', data.user.username);
 
         // Show the prompt after successful login
         this.showPrompt = true;

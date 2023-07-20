@@ -94,3 +94,35 @@ nav {
       display: none; /* Hide the underline on smaller screens */
     }
   }
+
+  .welcome-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  .welcome-heading::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+  
+  .welcome-heading:hover {
+    transform: translateX(5px); /* Add a small translation on hover */
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  .welcome-heading:hover::after {
+    width: 100%; /* Extend the underline on hover */
+  }
+  
