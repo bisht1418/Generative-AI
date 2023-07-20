@@ -2,11 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Movie } from '../models/movie.model';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-shows',
   templateUrl: './shows.component.html',
-  styleUrls: ['./shows.component.css']
+  styleUrls: ['./shows.component.css'],
+  animations: [
+    trigger('bookAnimation', [
+      state('initial', style({
+        transform: 'scale(1)',
+      })),
+      state('clicked', style({
+        transform: 'scale(1.2)',
+      })),
+      transition('initial <=> clicked', animate('200ms ease-in-out')),
+    ]),
+  ],
 })
 
 
@@ -71,6 +83,7 @@ export class ShowsComponent implements OnInit {
       }
     }
   }
+  
 
   shows = [
     { id: 1, date: this.getFormattedDate(0), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1 },

@@ -32,7 +32,8 @@ export class LoginComponent {
         // Handle successful login, e.g., store token in local storage and redirect to other page
         // Example:
         console.log('Login successful:', data);
-        localStorage.setItem('token', data.token);
+        console.log(data.token)
+        localStorage.setItem('token', data.access_token);
 
         // Show the prompt after successful login
         this.showPrompt = true;
