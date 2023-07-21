@@ -10,7 +10,6 @@ from bson.objectid import ObjectId
 from mongoengine import Document, StringField, ReferenceField, DateTimeField, ObjectIdField, connect
 from flask_cors import CORS
 
-
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb+srv://bishtnrj1418:neeraj@cluster0.ofkqsxc.mongodb.net/MovieMania?retryWrites=true&w=majority'
 # Change this to a random secure key in production
