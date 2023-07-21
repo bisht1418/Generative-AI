@@ -15,6 +15,36 @@
     <p>Loading user details...</p>
   </div>
 </div>
+<h2 class="heading">Here are your booking details</h2>
+<div class="card-container">
+  <div class="card" *ngFor="let booking of bookedData">
+    <div class="movie-info">
+      <img
+        [src]="booking.movie.Poster"
+        alt="{{ booking.movie.Title }}"
+        class="movie-poster"
+      />
+      <div class="movie-details">
+        <h2 class="movie-title">{{ booking.movie.Title }}</h2>
+        <p class="movie-year">{{ booking.movie.Year }}</p>
+        <p class="movie-type">{{ booking.movie.Type }}</p>
+        <!-- Add more movie details here as needed -->
+      </div>
+    </div>
+    <div class="booking-details">
+      <p class="booking-date">Date: {{ booking.show.date }}</p>
+      <p class="booking-time">Duration: {{ booking.show.time }}</p>
+      <p class="booking-time">Time: {{ booking.show.duration }}</p>
+      <p class="booking-seats">
+        Your Seat: {{ generateSeatCode(booking.show.seatsAvailable) }}
+      </p>
+      <div class="animation-container">
+        <p class="animated-text">Booking Confirmed!</p>
+      </div>
+      <!-- Add more booking details here as needed -->
+    </div>
+  </div>
+</div>
 
 <img
   class="back_img"

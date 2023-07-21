@@ -22,6 +22,7 @@ interface UserResponse {
 export class ProfileComponent implements OnInit {
   user: any;
   loading = false;
+  bookedData: any[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
 
     if (userEmail) {
       this.getUserDetails(userEmail);
+      this.getBookedDataByEmail(userEmail)
     } else {
       console.log('User email not found in local storage');
     }
@@ -51,6 +53,25 @@ export class ProfileComponent implements OnInit {
       (error) => {
         console.log('Error fetching users:', error);
         this.loading = false;
+      }
+    );
+  }
+
+  generateSeatCode(totalSeats: number): string {
+    const row = Math.floor(Math.random() * 10) + 1; // Random row number from 1 to 10
+    const seatLetter = String.fromCharCode(65 + Math.floor(Math.random() * 20)); // Random seat letter from A to T
+
+    return `${row}${seatLetter}`;
+  }
+
+  getBookedDataByEmail(email: string): void {
+    const apiUrl = 'http://127.0.0.1:5000/book';
+    this.http.get<any[]>(apiUrl).subscribe(
+      (data) => {
+        this.bookedData = data.filter((item) => item.email === email);
+      },
+      (error) => {
+        console.log('Error fetching booked data:', error);
       }
     );
   }
