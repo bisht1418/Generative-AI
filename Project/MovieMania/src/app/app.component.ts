@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // Retrieve data from local storage
     this.storedData = localStorage.getItem('name'); // Replace 'key' with the actual key used to store the data
+    this.storedData = JSON.parse(this.storedData);
 
     // Parse the data if it's in JSON format
     if (this.storedData) {

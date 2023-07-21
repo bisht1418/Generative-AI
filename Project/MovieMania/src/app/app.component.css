@@ -80,7 +80,7 @@ nav {
   }
 
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     nav {
       flex-wrap: wrap; /* Allow the navigation items to wrap to the next line */
       justify-content: space-around; /* Adjust the alignment for smaller screens */

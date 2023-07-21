@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Movie } from '../models/movie.model';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar'; 
 
 @Component({
   selector: 'app-shows',
@@ -30,9 +31,11 @@ export class ShowsComponent implements OnInit {
   seatRows!: number[][];
   selectedSeats: string[] = [];
   mymovie:  Movie | null = null;
+  showToast: boolean = false;
 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+
+  constructor(private route: ActivatedRoute, private http: HttpClient,private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -99,4 +102,41 @@ export class ShowsComponent implements OnInit {
     currentDate.setDate(currentDate.getDate() + offset);
     return currentDate.toISOString().slice(0, 10);
   }
+
+  bookShow(show: any, movie:any) {
+    // Get the user email from local storage
+    const email = localStorage.getItem('email');
+
+    if (!email) {
+      console.error('Email not found in local storage.');
+      return;
+    }
+
+    // Create the data object to send in the POST request
+    const data = {
+      email: email,
+      movie: this.movie,
+      show: show,
+    };
+
+    // Make the POST request to the backend API
+    this.http.post<any>('http://127.0.0.1:5000/book', data).subscribe(
+      (response) => {
+        // Handle the response if needed
+        console.log('Booking successful:', response);
+        this.showToast = true;
+        setTimeout(() => {
+          this.showToast = false;
+        }, 3000);
+
+      },
+      (error) => {
+        // Handle errors if any
+        console.error('Error while booking:', error);
+
+    
+      }
+    );
+  }
+
 }

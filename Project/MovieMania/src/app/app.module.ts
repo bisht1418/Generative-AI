@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBarModule
 
 import { AuthGuard } from './auth.guard';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +21,8 @@ import { RegistrationComponent } from './registration/registration.component';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,17 +33,22 @@ import { RegistrationComponent } from './registration/registration.component';
     ProfileComponent,
     LoginComponent,
     RegistrationComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SlickCarouselModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
 
   
   ],
   providers: [AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+
 })
 export class AppModule { }

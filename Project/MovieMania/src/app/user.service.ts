@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = '/api/users'; // Replace with your actual API endpoint
+  private apiUrl = 'http://127.0.0.1:5000'; // Replace with your actual API endpoint
 
   constructor(private http: HttpClient) { }
 
@@ -19,5 +19,9 @@ export class UserService {
 
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials);
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/users`);
   }
 }

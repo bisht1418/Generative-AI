@@ -28,7 +28,7 @@
           <p>Date: {{ show.date }}</p>
           <p>Show Time: {{ show.time }}</p>
           <p>Available Seats: {{ show.seatsAvailable }}</p>
-          <button>Book Show</button>
+          <button (click)="bookShow(show, movie)">Book Show</button>
           <!-- Add more show details here as needed -->
         </div>
       </div>
@@ -40,3 +40,10 @@
     <p>No movie details available.</p>
   </div>
 </ng-template>
+
+<div *ngIf="showToast" class="toast">
+  Booking successful!
+  <br />
+  <span style="color: green; font-weight: bold">Check your Profile</span>
+  <!-- You can display any message you want here -->
+</div>
