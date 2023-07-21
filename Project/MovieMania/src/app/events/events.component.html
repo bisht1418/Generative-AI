@@ -8,8 +8,26 @@
   </div>
 </div>
 
+<div class="event-card-container">
+  <div class="card" *ngFor="let event of eventData">
+    <img [src]="event.Poster" class="card-img-top" alt="Event Poster" />
+    <div class="card-body">
+      <h5 class="card-title">{{ event.Title }}</h5>
+      <p class="card-text">Year: {{ event.Year }}</p>
+    </div>
+  </div>
+</div>
+
 <img
   class="back_img"
   src="https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-anubhav-bassi-live-new-material-jln-stadium-0-2023-7-19-t-12-2-48.jpg"
   alt=""
 />
+
+<div>
+  <img
+    width="100%"
+    src="https://assets-in.bmscdn.com/promotions/cms/creatives/1689237100532_indersahanidesktop.jpg"
+    alt=""
+  />
+</div>
