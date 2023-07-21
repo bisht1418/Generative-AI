@@ -87,15 +87,26 @@ export class ShowsComponent implements OnInit {
     }
   }
   
-
-  shows = [
-    { id: 1, date: this.getFormattedDate(0), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
-    { id: 2, date: this.getFormattedDate(0), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
-    { id: 3, date: this.getFormattedDate(1), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
-    { id: 4, date: this.getFormattedDate(1), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
-    { id: 5, date: this.getFormattedDate(2), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
-    { id: 6, date: this.getFormattedDate(2), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1 },
-  ];
+  getRandomTime(timeSlot:any) {
+    let startTime, endTime;
+  
+    if (timeSlot === 'morning') {
+      startTime = new Date();
+      startTime.setHours(6, 0, 0, 0); // 6:00 AM
+      endTime = new Date();
+      endTime.setHours(12, 0, 0, 0); // 12:00 PM
+    } else if (timeSlot === 'evening') {
+      startTime = new Date();
+      startTime.setHours(12, 0, 0, 0); // 12:00 PM
+      endTime = new Date();
+      endTime.setHours(22, 0, 0, 0); // 10:00 PM
+    } else {
+      throw new Error('Invalid time slot. Use "morning" or "evening".');
+    }
+  
+    const randomTime = new Date(startTime.getTime() + Math.random() * (endTime.getTime() - startTime.getTime()));
+    return randomTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
   
   getFormattedDate(offset: number): string {
     const currentDate = new Date();
@@ -133,10 +144,19 @@ export class ShowsComponent implements OnInit {
       (error) => {
         // Handle errors if any
         console.error('Error while booking:', error);
-
-    
       }
     );
   }
+
+  shows = [
+    { id: 1, date: this.getFormattedDate(0), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1, duration: this.getRandomTime("morning")},
+    { id: 2, date: this.getFormattedDate(0), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1,duration: this.getRandomTime("evening") },
+    { id: 3, date: this.getFormattedDate(1), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1,duration: this.getRandomTime("morning") },
+    { id: 4, date: this.getFormattedDate(1), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1,duration: this.getRandomTime("evening") },
+    { id: 5, date: this.getFormattedDate(2), time: 'Morning', seatsAvailable: Math.floor(Math.random() * 50) + 1 ,duration: this.getRandomTime("morning")},
+    { id: 6, date: this.getFormattedDate(2), time: 'Evening', seatsAvailable: Math.floor(Math.random() * 50) + 1 ,duration: this.getRandomTime("evening")},
+  ];
+
+  
 
 }
