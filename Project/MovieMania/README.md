@@ -14,7 +14,7 @@ The application is deployed and can be accessed here: [Live Demo](https://genera
 
 Welcome to my awesome backend application!
 
-The application is deployed and can be accessed here: [Live Demo](https://tame-lime-quail-tie.cyclic.app/)
+The application is deployed and can be accessed here: [Live Demo](https://bored-handbag-dog.cyclic.app/)
 
 
 
