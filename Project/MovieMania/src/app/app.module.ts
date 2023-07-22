@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RegistrationComponent } from './registration/registration.component';
 import { SearchComponent } from './search/search.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 
 
@@ -35,6 +36,7 @@ import { SearchComponent } from './search/search.component';
     LoginComponent,
     RegistrationComponent,
     SearchComponent,
+    ChatbotComponent,
 
   ],
   imports: [
