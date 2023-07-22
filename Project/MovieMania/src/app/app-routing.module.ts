@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'search', component: SearchComponent }
+  { path: 'search', component: SearchComponent,canActivate:[AuthGuard] }
 ];
 
 @NgModule({
