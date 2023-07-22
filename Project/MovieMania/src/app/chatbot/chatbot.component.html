@@ -1,26 +1,52 @@
-<div
-  class="chat-container"
-  [class.expanded]="isExpanded"
-  (click)="toggleChatbox()"
->
-  <!-- Your chatbot content here -->
+<div class="chat-container" [class.expanded]="isExpanded">
   <div class="chat-area">
-    <div class="message" *ngFor="let message of messages">
+    <div class="message" *ngFor="let message of chatMessages">
       <div
-        [class.user-message]="message.isUser"
-        [class.bot-message]="!message.isUser"
+        [class.user-message]="message.sender === 'user'"
+        [class.chatbot-message]="message.sender === 'chatbot'"
       >
         {{ message.text }}
       </div>
     </div>
   </div>
-  <div class="user-input">
+
+  <div class="user-input" [class.expanded]="isExpanded">
     <input
       type="text"
-      [(ngModel)]="userInput"
-      (keyup.enter)="sendMessage()"
+      [(ngModel)]="userQuery"
+      (keyup.enter)="onSubmit()"
       placeholder="Type your message..."
     />
-    <button (click)="sendMessage()">Send</button>
+    <button (click)="onSubmit()">Send</button>
   </div>
+
+  <button class="toggle-chat-btn" (click)="toggleChat()">
+    <i [class]="isExpanded ? 'fa fa-chevron-up' : 'fa fa-chevron-down'">X</i>
+  </button>
+</div>
+<div class="chat-container" [class.expanded]="isExpanded">
+  <div class="chat-area" [class.expanded]="isExpanded">
+    <div class="message" *ngFor="let message of chatMessages">
+      <div
+        [class.user-message]="message.sender === 'user'"
+        [class.chatbot-message]="message.sender === 'chatbot'"
+      >
+        {{ message.text }}
+      </div>
+    </div>
+  </div>
+
+  <div class="user-input" [class.expanded]="isExpanded">
+    <input
+      type="text"
+      [(ngModel)]="userQuery"
+      (keyup.enter)="onSubmit()"
+      placeholder="Type your message..."
+    />
+    <button (click)="onSubmit()">Send</button>
+  </div>
+
+  <button class="toggle-chat-btn" (click)="toggleChat()">
+    <i [class]="isExpanded ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+  </button>
 </div>
