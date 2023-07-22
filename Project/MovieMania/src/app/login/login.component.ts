@@ -27,7 +27,7 @@ export class LoginComponent {
 
     this.loading = true
     // Make a POST request to the login endpoint
-    this.http.post<any>('http://127.0.0.1:5000/login', this.credentials).subscribe(
+    this.http.post<any>('https://tame-lime-quail-tie.cyclic.app/login', this.credentials).subscribe(
       (data) => {
         // Handle successful login, e.g., store token in local storage and redirect to other page
         // Example:

@@ -24,7 +24,7 @@ export class RegistrationComponent {
     };
 
     // Make the HTTP POST request to the registration endpoint
-    this.http.post('http://127.0.0.1:5000/register', registrationData).subscribe(
+    this.http.post('https://tame-lime-quail-tie.cyclic.app/register', registrationData).subscribe(
       () => {
         // Registration successful, redirect to the login page
         this.router.navigate(['/login']);

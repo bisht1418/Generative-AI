@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   getUserDetails(email: string): void {
     this.loading = true;
     // Make a GET request to fetch all users
-    this.http.get<UserResponse>('http://127.0.0.1:5000/users').subscribe(
+    this.http.get<UserResponse>('https://tame-lime-quail-tie.cyclic.app/users').subscribe(
       (response) => {
         console.log('Response:', response);
         // Find the user with the matching email
@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getBookedDataByEmail(email: string): void {
-    const apiUrl = 'http://127.0.0.1:5000/book';
+    const apiUrl = 'https://tame-lime-quail-tie.cyclic.app/book';
     this.http.get<any[]>(apiUrl).subscribe(
       (data) => {
         this.bookedData = data.filter((item) => item.email === email);
