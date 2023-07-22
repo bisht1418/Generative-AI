@@ -9,6 +9,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthGuard } from './auth.guard';
+import { SearchComponent } from './search/search.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,7 +19,8 @@ const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegistrationComponent }
+  { path: 'register', component: RegistrationComponent },
+  { path: 'search', component: SearchComponent }
 ];
 
 @NgModule({

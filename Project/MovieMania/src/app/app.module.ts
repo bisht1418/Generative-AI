@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RegistrationComponent } from './registration/registration.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -33,6 +34,7 @@ import { RegistrationComponent } from './registration/registration.component';
     ProfileComponent,
     LoginComponent,
     RegistrationComponent,
+    SearchComponent,
 
   ],
   imports: [

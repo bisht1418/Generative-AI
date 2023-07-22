@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
+import { Movie } from '../models/movie.model';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +10,16 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  movies: Movie[] = []; // Update the type declaration
+  filteredMovies: Movie[] = []; // Update the type declaration
+  searchQuery = '';
+  loading = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private http: HttpClient) { }
 
   ngOnInit(): void {
     // Subscribe to the NavigationEnd event
+    this.getMovies();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -41,6 +48,21 @@ export class HomeComponent implements OnInit {
 
   onSelectImage(imageUrl: string): void {
     this.selectedImage = imageUrl;
+  }
+
+  getMovies(): void {
+    this.loading = true;
+    this.http.get<Movie[]>('https://bored-handbag-dog.cyclic.app/movies').subscribe(
+      (data) => {
+        this.movies = data;
+        this.filteredMovies = data; // Initialize the filtered list with all movies
+        this.loading = false;
+      },
+      (error) => {
+        console.log('Error fetching movies:', error);
+        this.loading = false;
+      }
+    );
   }
 
 }

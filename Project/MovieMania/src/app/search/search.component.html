@@ -1,0 +1,22 @@
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (keyup)="onSearch()"
+    placeholder="Search movies..."
+  />
+  <button (click)="onSearch()">Search</button>
+</div>
+
+<div class="movie-container" *ngIf="!loading">
+  <div class="movie-card" *ngFor="let movie of filteredMovies">
+    <a [routerLink]="['/shows', movie.id]">{{ movie.Title }}</a>
+    <p>Year: {{ movie.Year }}</p>
+    <img [src]="movie.Poster" alt="{{ movie.Title }}" />
+  </div>
+</div>
+
+<div class="loading-container" *ngIf="loading">
+  <!-- Custom Spinner -->
+  <div class="spinner"></div>
+</div>
