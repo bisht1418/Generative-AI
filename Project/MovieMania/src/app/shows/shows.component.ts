@@ -47,7 +47,7 @@ export class ShowsComponent implements OnInit {
 
   getMovieDetails(): void {
     this.loading = true;
-    this.http.get<Movie>('http://127.0.0.1:5000/movies/' + this.movieId).subscribe(
+    this.http.get<Movie>('https://bored-handbag-dog.cyclic.app/movies/' + this.movieId).subscribe(
       (data) => {
         this.movie = data;
         this.loading = false;
@@ -131,7 +131,7 @@ export class ShowsComponent implements OnInit {
     };
 
     // Make the POST request to the backend API
-    this.http.post<any>('http://127.0.0.1:5000/book', data).subscribe(
+    this.http.post<any>('https://bored-handbag-dog.cyclic.app/book', data).subscribe(
       (response) => {
         // Handle the response if needed
         console.log('Booking successful:', response);

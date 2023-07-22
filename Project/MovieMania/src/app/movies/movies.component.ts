@@ -21,7 +21,7 @@ export class MoviesComponent implements OnInit {
 
   getMovies(): void {
     this.loading = true;
-    this.http.get<Movie[]>('https://tame-lime-quail-tie.cyclic.app/movies').subscribe(
+    this.http.get<Movie[]>('https://bored-handbag-dog.cyclic.app/movies').subscribe(
       (data) => {
         this.movies = data;
         this.loading = false;
