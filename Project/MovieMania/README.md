@@ -4,6 +4,21 @@
 
 Welcome to Movie Mania, your one-stop destination to explore and book movie shows. Discover the latest upcoming movies, their show timings, available seats, and book tickets for your favorite films right here!
 
+# My Awesome Frontend Application
+
+Welcome to my awesome brontend application!
+
+The application is deployed and can be accessed here: [Live Demo](https://generative-ai-plum.vercel.app/)
+
+# My Awesome Backend Application
+
+Welcome to my awesome backend application!
+
+The application is deployed and can be accessed here: [Live Demo](https://tame-lime-quail-tie.cyclic.app/)
+
+
+
+
 <img width="947" alt="Screenshot 2023-07-22 100844" src="https://github.com/bisht1418/Generative-AI/assets/112753461/008b5603-0bfd-4e28-84fb-970fc10577d2">
 
 
