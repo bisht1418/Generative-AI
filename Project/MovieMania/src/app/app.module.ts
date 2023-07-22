@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBarModule
+import { MatPaginatorModule } from '@angular/material/paginator'; // Import the paginator module
+
 
 import { AuthGuard } from './auth.guard';
 import { AppRoutingModule } from './app-routing.module';
@@ -41,9 +42,8 @@ import { RegistrationComponent } from './registration/registration.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
-
-  
+    MatSnackBarModule,
+    MatPaginatorModule // Add the MatPaginatorModule to imports
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
