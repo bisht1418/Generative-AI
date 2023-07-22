@@ -17,6 +17,9 @@ Welcome to my awesome backend application!
 The application is deployed and can be accessed here: [Live Demo](https://bored-handbag-dog.cyclic.app/)
 
 
+Documentation: [Live Demo](https://docs.google.com/document/d/1XWcqM7k19nq9XhC9ARpKY_B0n_kwY2Zmojz05XoGRRM/edit?usp=sharing)
+
+
 
 
 <img width="947" alt="Screenshot 2023-07-22 100844" src="https://github.com/bisht1418/Generative-AI/assets/112753461/008b5603-0bfd-4e28-84fb-970fc10577d2">
