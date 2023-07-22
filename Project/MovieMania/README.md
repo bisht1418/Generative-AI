@@ -38,10 +38,10 @@ Experience Movie Mania live! Check out our [Demo](https://www.example.com) (if a
 
 Movie Mania is built using cutting-edge technologies and frameworks:
 
-- Frontend: HTML, CSS, JavaScript, Angular (or other frontend frameworks)
-- Backend: Python, Flask (or other backend frameworks)
-- Database: MongoDB (or other database systems)
-- Authentication: JWT (JSON Web Tokens) or other authentication mechanisms
+- Frontend: HTML, CSS, JavaScript, Angular 
+- Backend: Python, Flask
+- Database: MongoDB 
+- Authentication: JWT (JSON Web Tokens) 
 
 ## 🔧 Getting Started
 
