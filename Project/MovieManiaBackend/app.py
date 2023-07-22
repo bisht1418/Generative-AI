@@ -111,8 +111,6 @@ def register():
     return jsonify(message="successfully register", user=user_data)
 
 
-# User login endpoint
-
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -128,8 +126,6 @@ def login():
     return jsonify(user=user_dict, access_token=access_token)
 
 
-# app.py
-
 @app.route('/users', methods=['GET'])
 def get_users():
     users = User.objects().all()
@@ -142,9 +138,6 @@ def get_users():
         user_data['_id'] = str(user_data['_id'])
 
     return jsonify(users=users_data)
-
-# =======================================================================
-# =======================================================================
 
 
 @app.route('/movies', methods=['GET'])
@@ -182,33 +175,6 @@ def get_movie_by_id(movie_id):
             return jsonify(movie_data), 200
         except Movie.DoesNotExist:
             return jsonify({'message': 'Movie not found'}), 404
-
-
-# @app.route('/movies/<string:imdbID>', methods=['PUT'])
-# def update_movie(imdbID):
-#     data = request.json
-#     movie = Movie.objects(imdbID=imdbID).first()
-#     if not movie:
-#         return jsonify({'message': 'Movie not found'}), 404
-
-#     movie.title = data.get('title', movie.title)
-#     movie.year = data.get('year', movie.year)
-#     movie.type = data.get('type', movie.type)
-#     movie.poster = data.get('poster', movie.poster)
-#     movie.save()
-#     return jsonify(ma.dump(movie))
-
-
-# @app.route('/movies/<imdbID>', methods=['DELETE'])
-# def delete_movie(imdbID):
-#     movie = Movie.objects(imdbID=imdbID).first()
-#     if not movie:
-#         return jsonify({'message': 'Movie not found'}), 404
-
-#     movie.delete()
-#     return jsonify({'message': 'Movie deleted successfully'})
-
-# ============================================================
 
 
 @app.route('/book', methods=['POST'])
