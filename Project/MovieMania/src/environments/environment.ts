@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiKey: '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',
+    apiKey: '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',
   };
   
